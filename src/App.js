@@ -10,7 +10,7 @@ class App extends React.Component{
             <div>
                 <Header header="This is my Header"/>
                 <Workarea>
-                    <ToDoContainer/>
+                    <ToDoContainer/> 
                 </Workarea>
                 <Footer footer="Am a footer"/>
             </div>

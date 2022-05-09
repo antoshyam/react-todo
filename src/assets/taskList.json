@@ -2,22 +2,26 @@
     {
         "id": 1,
         "name": "Task 1",
-        "description": "Some task"
+        "description": "Some task from JSON",
+        "dueBy": 3
     },
     {
         "id": 2,
         "name": "Task 2",
-        "description": "Some task"
+        "description": "Some task",
+        "dueBy": 3
     },
     {
         "id": 3,
         "name": "Task 3",
-        "description": "Some task"
+        "description": "Some task",
+        "dueBy": 3
     },
     {
         "id": 4,
         "name": "Task 4",
-        "description": "Some task"
+        "description": "Some task",
+        "dueBy": 3
     }
 
 ]

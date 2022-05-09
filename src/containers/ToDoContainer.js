@@ -9,39 +9,38 @@ class ToDoContainer extends React.Component {
 
         this.state = {
             managedTask: null,
-            taskList: [
-                {
-                    "id": 1,
-                    "name": "Task 1",
-                    "description": "Some task"
-                },
-                {
-                    "id": 2,
-                    "name": "Task 2",
-                    "description": "Some task"
-                },
-                {
-                    "id": 3,
-                    "name": "Task 3",
-                    "description": "Some task"
-                },
-                {
-                    "id": 4,
-                    "name": "Task 4",
-                    "description": "Some task"
-                }
-
-            ]
+            taskList: taskList
         }
 
         this.addTask = this.addTask.bind(this)
         this.editTask = this.editTask.bind(this)
+        this.deleteTask = this.deleteTask.bind(this)
         this.saveTask = this.saveTask.bind(this)
+        this.editTaskInline = this.editTaskInline.bind(this)
     }
 
-    addTask(task) {
+    editTaskInline(value, keyName, index) {
+        let newTaskList = [...this.state.taskList]
+
+        let updatedTask = newTaskList[index]
+        let parsedValue = parseInt(value)
+
+        if(!isNaN(parsedValue)) {
+            updatedTask[keyName] = value
+            this.setState({
+                taskList: newTaskList
+            })
+        }
+    }
+
+    addTask() {
+        //API call to fetch next sequence from your DB.
+        let newTask = {
+            id: this.state.taskList.length + 1
+        }
+
         this.setState({
-            taskList: [...this.state.taskList, task]
+            managedTask: newTask
         })
     }
 
@@ -51,12 +50,25 @@ class ToDoContainer extends React.Component {
         })
     }
 
+    deleteTask(deletedTask) {
+        let newTaskList = [...this.state.taskList]
+
+        newTaskList = this.state.taskList.filter(task => task.id != deletedTask.id)
+
+        this.setState({
+            taskList: newTaskList
+        })
+    }
+
     saveTask(updatedTask) {
         let newTaskList = [...this.state.taskList]
 
         let updatedTaskIndex = this.state.taskList.findIndex(task => task.id == updatedTask.id)
 
-        newTaskList[updatedTaskIndex] = updatedTask
+        if (updatedTaskIndex != -1)
+            newTaskList[updatedTaskIndex] = updatedTask
+        else
+            newTaskList = [...newTaskList, updatedTask]
 
         this.setState({
             taskList: newTaskList,
@@ -67,9 +79,14 @@ class ToDoContainer extends React.Component {
     render() {
         return (
             this.state.managedTask ?
-                <ManageTasks task={this.state.managedTask} addTask={this.addTask} saveTask={this.saveTask}/>
+                <ManageTasks task={this.state.managedTask} saveTask={this.saveTask} />
                 :
-                <ListTasks taskList={this.state.taskList} editTask={this.editTask}/>
+                <ListTasks taskList={this.state.taskList}
+                    editTask={this.editTask}
+                    deleteTask={this.deleteTask}
+                    addTask={this.addTask}
+                    editTaskInline={this.editTaskInline}
+                />
         )
     }
 

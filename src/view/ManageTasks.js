@@ -23,8 +23,9 @@ class ManageTasks extends React.Component {
     // JSON object "key" : value
     handleInputChange(event, keyName){
 
+        //No Error handling
         if(keyName == "name" ){
-            if(this.state.managedTask[keyName].length < 4){
+            if(!this.state.managedTask[keyName] || this.state.managedTask[keyName].length < 4){
                 this.setState({
                     errors: {
                         ...this.state.errors,
@@ -40,7 +41,6 @@ class ManageTasks extends React.Component {
                 })
             }
         }
-        
         this.setState({
             managedTask: {...this.state.managedTask, [keyName]: event.target.value}
         })
