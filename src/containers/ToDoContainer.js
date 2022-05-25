@@ -8,7 +8,7 @@ class ToDoContainer extends React.Component {
         super(props)
 
         this.state = {
-            managedTask: null,
+            managedTask: null, // const[managedTask, set ManagedTask] = useState(null)
             taskList: taskList
         }
 
@@ -19,7 +19,7 @@ class ToDoContainer extends React.Component {
         this.editTaskInline = this.editTaskInline.bind(this)
     }
 
-    editTaskInline(value, keyName, index) {
+    editTaskInline = (value, keyName, index)=> {
         let newTaskList = [...this.state.taskList]
 
         let updatedTask = newTaskList[index]

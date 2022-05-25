@@ -37,10 +37,12 @@ class ManageTasks extends React.Component {
                     errors: {
                         ...this.state.errors,
                         [keyName]: undefined
-                    }
+                    },
+                    managedTask: {}
                 })
             }
         }
+
         this.setState({
             managedTask: {...this.state.managedTask, [keyName]: event.target.value}
         })
@@ -66,6 +68,11 @@ class ManageTasks extends React.Component {
                     <InputText label="Id" value={this.state.managedTask.id} disabled />
                     <InputText label="Name" value={this.state.managedTask.name} hasError={this.state.errors.name}
                         onChange={(event) => this.handleInputChange(event, "name")}/>
+                    <select value={this.state.managedTask.priority} onChange={(event) => this.handleInputChange(event, "priority")}>
+                        <option label='High' value={1}/>
+                        <option label='Medium' value={2}/>
+                        <option label='Low' value={3}/>
+                    </select>
                     <InputText label="Description" value={this.state.managedTask.description} 
                         onChange={(event) => this.handleInputChange(event, "description")} />
                     <button>Submit</button>

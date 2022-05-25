@@ -7,3 +7,5 @@ ReactDOM.render(
     <App/>,
     document.getElementById("root")
 )
+
+ReactDOM.createPortal(Modal, document.getElementById("root"))
